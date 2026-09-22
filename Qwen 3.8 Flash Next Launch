@@ -27,7 +27,7 @@ taskset -c 0-7 ~/.local/bin/llama-server \
   --spec-type ngram-mod \
   --no-warmup \
   --reasoning-format deepseek \
-  --reasoning-budget 20480 \
+  --reasoning-budget 8480 \
   --temp 1 \
   --top-k 20 \
   --min-p 0 \
