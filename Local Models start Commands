@@ -47,6 +47,15 @@ taskset -c 0-7 ~/.local/bin/llama-server \
 llama-server \
   -m /mnt/data2/Small_AI_Models/Qwen3.8-27B/Qwen3.8-27B-UD-IQ3_XXS.gguf \
   --mmproj /mnt/data2/Small_AI_Models/Qwen3.8-27B/mmproj-BF16.gguf \
-  -c 16384 -ngl 99 -fa on --jinja --reasoning auto \
-  --host 127.0.0.1 --port 8080
-
+  -c 32768 \
+  -ngl 99 \
+  -fa on \
+  --cache-type-k q8_0 \
+  --cache-type-v q8_0 \
+  --spec-type draft-mtp \
+  --spec-draft-n-max 2 \
+  --parallel 1 \
+  --jinja \
+  --reasoning auto \
+  --host 127.0.0.1 \
+  --port 8080
