@@ -52,7 +52,7 @@ llama-server \
   --host 127.0.0.1 --port 8080 \
   -ngl all \
   --fit off \
-  -c 99328 \
+  -c 94208 \
   -fa on \
   -ctk q4_0 -ctv q4_0 \
   --spec-type draft-mtp --spec-draft-n-max 2 \
