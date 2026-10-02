@@ -45,17 +45,25 @@ taskset -c 0-7 ~/.local/bin/llama-server \
  ╚══▀▀═╝  ╚══╝╚══╝ ╚══════╝╚═╝  ╚═══╝    ╚═════╝ ╚═╝ ╚════╝     ╚══════╝  ╚═╝   ╚═════╝ 
 
 llama-server \
-  -m /mnt/data2/Small_AI_Models/Qwen3.8-27B/Qwen3.8-27B-UD-IQ3_XXS.gguf \
-  --mmproj /mnt/data2/Small_AI_Models/Qwen3.8-27B/mmproj-BF16.gguf \
-  -c 32768 \
-  -ngl 99 \
+  -m /mnt/data2/Models/Qwen/Qwen3.8-27B-Uncensored-IQ3_M.gguf \
+  --mmproj /mnt/data2/Models/Qwen/mmproj-Qwen3.8-27B-Uncensored-f16.gguf \
+  --no-mmproj-offload \
+  --alias qwen38-27b \
+  --host 127.0.0.1 --port 8080 \
+  -ngl all \
+  --fit off \
+  -c 99328 \
   -fa on \
-  --cache-type-k q8_0 \
-  --cache-type-v q8_0 \
-  --spec-type draft-mtp \
-  --spec-draft-n-max 2 \
-  --parallel 1 \
+  -ctk q4_0 -ctv q4_0 \
+  --spec-type draft-mtp --spec-draft-n-max 2 \
+  -np 1 \
+  -b 512 -ub 256 \
+  -t 8 -tb 20 \
   --jinja \
-  --reasoning auto \
-  --host 127.0.0.1 \
-  --port 8080
+  --no-context-shift \
+  --cache-prompt --cache-ram 4096 \
+  --ctx-checkpoints 4 --checkpoint-min-step 8192 \
+  --reasoning on --reasoning-budget 2048 \
+  --image-min-tokens 1024 --image-max-tokens 2048 \
+  --no-warmup \
+  --metrics
