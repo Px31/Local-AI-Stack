@@ -63,7 +63,7 @@ llama-server \
   --no-context-shift \
   --cache-prompt --cache-ram 4096 \
   --ctx-checkpoints 4 --checkpoint-min-step 8192 \
-  --reasoning on --reasoning-budget 2048 \
+  --reasoning-effort medium --reasoning-budget 2048 \
   --image-min-tokens 1024 --image-max-tokens 2048 \
   --no-warmup \
   --metrics
