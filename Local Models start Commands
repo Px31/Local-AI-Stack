@@ -44,6 +44,8 @@ taskset -c 0-7 ~/.local/bin/llama-server \
 ╚██████╔╝╚███╔███╔╝███████╗██║ ╚████║    ██████╔╝██╗╚█████╔╝    ███████╗  ██║   ██████╔╝
  ╚══▀▀═╝  ╚══╝╚══╝ ╚══════╝╚═╝  ╚═══╝    ╚═════╝ ╚═╝ ╚════╝     ╚══════╝  ╚═╝   ╚═════╝ 
 
+export GGML_CUDA_ENABLE_UNIFIED_MEMORY=1
+
 llama-server \
   -m /mnt/data2/Models/Qwen/Qwen3.8-27B-Uncensored-IQ3_M.gguf \
   --mmproj /mnt/data2/Models/Qwen/mmproj-Qwen3.8-27B-Uncensored-f16.gguf \
@@ -51,21 +53,19 @@ llama-server \
   --alias qwen38-27b \
   --host 127.0.0.1 --port 8080 \
   -ngl all \
+  --spec-draft-ngl all \
   --fit off \
   -c 93184 \
   -fa on \
   -ctk q4_0 -ctv q4_0 \
   --spec-type draft-mtp \
   --spec-draft-n-max 2 \
-  --spec-draft-type-k q8_0 \
-  --spec-draft-type-v q8_0 \
-  --n-cpu-ffn 4 \
   -np 1 \
-  -b 512 -ub 256 \
-  -t 8 -tb 8 \
+  -b 2048 -ub 512 \
+  -t 8 -tb 12 \
   --jinja \
-  --reasoning-effort xhigh \
-  --reasoning-budget -1 \
+  --reasoning-effort medium \
+  --reasoning-budget 8192 \
   --no-context-shift \
   --cache-prompt --cache-ram 4096 \
   --ctx-checkpoints 2 --checkpoint-min-step 8192 \
