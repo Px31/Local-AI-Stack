@@ -56,16 +56,19 @@ llama-server \
   --spec-draft-ngl all \
   --fit off \
   -c 93184 \
+  --kv-unified \
   -fa on \
   -ctk q4_0 -ctv q4_0 \
   --spec-type draft-mtp \
-  --spec-draft-n-max 2 \
+  --spec-draft-n-max 3 \
+  --spec-draft-p-min 0.65 \
   -np 1 \
   -b 2048 -ub 512 \
-  -t 8 -tb 12 \
+  -t 10 -tb 12 \
   --jinja \
   --reasoning-effort medium \
-  --reasoning-budget 8192 \
+  --reasoning-budget 8128 \
+  --reasoning-budget-message "\n\n[Reasoning budget exhausted. Proceeding to final answer.]" \
   --no-context-shift \
   --cache-prompt --cache-ram 4096 \
   --ctx-checkpoints 2 --checkpoint-min-step 8192 \
